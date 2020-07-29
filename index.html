@@ -54,7 +54,7 @@
             
             <a class="btn btn-primary btn-lg" href="#" role="button">Lihat hasil</a>
         </div>
-        <form name="submit-to-google-sheet">
+        <form id="form" name="submit-to-google-sheet">
             <h5><span class="badge badge-primary">Profil Diri</span></h5>
             <hr>
 
@@ -249,8 +249,9 @@
             <hr>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="origin">Area tempat tinggal (kelurahan, kota)</label>
+                    <label for="origin">Area tempat tinggal* (kelurahan, kota)</label>
                     <input type="text" class="form-control" name="origin" id="origin" required>
+                    <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi sesungguhnya</small>
                     <div id='originMap'
                         style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
                 </div>
@@ -283,14 +284,15 @@
 
         form.addEventListener('submit', e => {
             transportType();
+            alert('The form has been successfully submitted ')
+            $('#form')[0].reset();
             e.preventDefault()
             fetch(scriptURL, {
                     method: 'POST',
                     body: new FormData(form)
                 })
                 .then(response => function () {
-                    alert('form successfully submitted');
-
+                    $('#form')[0].reset();
                 })
                 .catch(error => console.error('Error!', error.message))
         })
