@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rumah-Kantor Study Form</title>
 
 
     <!-- Mapbox -->
@@ -31,40 +31,42 @@
 </head>
 
 <body>
-    <div class="container-sm">
+    <div class="container">
 
         <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-                to featured content or information.</p>
+            <h2>Studi Mobilitas Kantor-Rumah</h2>
+            <p>Tim Pakar Satuan Tugas Penanganan COVID-19, Dewi Nur Aisyah mengatakan, setidaknya ada 90
+                perkantoran di DKI Jakarta yang menjadi klister penyebaran COVID-10. Setidaknya 459 orang dinyatakan
+                positif dari ke-90 perkantoran tersebut (Tirto.id, 29/07/2020). DKI Jakarta sebagai pusat perkantoran di
+                kawasan metropolitan Jabodetabek menjadi hub bagi pegawai baik negeri swasta yang bertempat tinggal dari
+                kota/kabupaten di sekitarnya. Kamu bisa menemukan rekan kerja dalam satu kantor ataupun pegawai lainnya
+                dalam satu Gedung yang tinggal di kawasan sub-urban lainnya dengan menggunakan moda transportasi yang
+                beragam dari mulai kendaraan pribadi dan umum seperti KRL, MRT, Bus, dan lainnya.
+            </p>
+            <p>
+                Tingginya frekuensi pertemuan dengan beragam orang dari berbagai wilayah pada satu tempat dapat
+                meningkatkan potensi tertular dan menularkan penyakit Covid-19. Oleh karena itu, kami ingin melakukan
+                survey Origin-Destination dan penggunaan moda transportasi bagi pekerja yang bekerja di kawasan
+                Jabodetak. Data dan informasi yang dikumpulkan akan dipublikasikan agar meningkatkan kewaspadaan dan
+                mitigasi teman sekalian dalam bekerja. Terimakasih 
+            </p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            
+            <a class="btn btn-primary btn-lg" href="#" role="button">Lihat hasil</a>
         </div>
         <form name="submit-to-google-sheet">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="origin">Asal</label>
-                    <input type="text" class="form-control" name="origin" id="origin" required>
-                    <div id='originMap'
-                        style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="destination">Tujuan</label>
-                    <input type="text" class="form-control" name="destination" id="destination" required>
-                    <div id='destinationMap'
-                        style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
-                </div>
-            </div>
+            <h5><span class="badge badge-primary">Profil Diri</span></h5>
+            <hr>
+
             <div class="form-group">
                 <label for="age">Usia</label>
                 <input type="text" class="form-control" name="age" id="age" placeholder="" required>
             </div>
             <div class="form-row">
-
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="occupation">Jenis Pekerjaan</label>
-                    <select class="form-control" name="occupation" id="occupation" onchange="selectOccupation()" required>
+                    <select class="form-control" name="occupation" id="occupation" onchange="selectOccupation()"
+                        required>
                         <option>Pegawai Negeri</option>
                         <option>Pegawai Swasta</option>
                         <option>Tenaga Medis</option>
@@ -73,13 +75,14 @@
                         <option>Lainnya</option>
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="other_occupation">Pekerjaan lainnya</label>
-                    <input type="text" class="form-control" name="other_occupation" id="other_occupation" placeholder="" disabled>
+                    <input type="text" class="form-control" name="other_occupation" id="other_occupation" placeholder=""
+                        disabled>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="start_work">Sudah mulai ke kantor?</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="start_work" id="sudahKeKantor" value="true"
@@ -96,30 +99,173 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="work_frequency">Frequensi kamu ke tempat kerja?</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="work_frequency" id="less" value="<3"
                             disabled>
                         <label class="form-check-label" for="less">
-                            Kurang dari 3 hari dalam seminggu
+                            ≤ 3 hari/minggu
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="work_frequency" id="more" value=">3"
                             disabled>
                         <label class="form-check-label" for="more">
-                            Lebih dari 3 hari dalam seminggu
+                            > 3 hari/minggu
                         </label>
                     </div>
                 </div>
+            </div>
+            <br>
+            <h5><span class="badge badge-primary">Profil Tempat Tinggal</span></h5>
+            <hr>
 
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="surrounding_environment">Lingkungan Tempat Tinggal</label>
+                    <select class="form-control" name="surrounding_environment" id="surrounding_environment" required>
+                        <option>Kompleks Perumahan</option>
+                        <option>Permukiman Padat</option>
+                        <option>Apartemen</option>
+                        <option>Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="house_type">Jenis Tempat Tinggal</label>
+                    <select class="form-control" name="house_type" id="house_type" required>
+                        <option>Rumah Tapak</option>
+                        <option>Apartemen Bertingkat</option>
+                        <option>Kamar Kosan</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="total_people">Jumlah orang yang tinggal bersama</label>
+                    <input type="text" class="form-control" name="total_people" id="total_people" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="vulnerable_group">Apa kamu tinggal dengan balita, lansia, dan atau Ibu Hamil?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vulnerable_group" id="vulnerable_yes"
+                            value="Ya">
+                        <label class="form-check-label" for="vulnerable_yes">
+                            Ya
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vulnerable_group" id="vulnerable_no"
+                            value="Tidak">
+                        <label class="form-check-label" for="vulnerable_no">
+                            Tidak
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="total_trip">Berapa jumlah perjalanan (trip) menggunakan transportasi publik selama satu
+                        minggu?</label>
+                    <input type="text" class="form-control" name="total_trip" id="total_trip" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="transport_type">Apa transportasi yang kamu gunakan?</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="krl"
+                            id="transport_type">
+                        <label class="form-check-label" for="krl">
+                            KRL (Commuter Line)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="mrt" id="mrt">
+                        <label class="form-check-label" for="mrt">
+                            MRT
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="lrt" id="lrt">
+                        <label class="form-check-label" for="lrt">
+                            LRT
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="bus" id="bus">
+                        <label class="form-check-label" for="bus">
+                            Bus (APTB, Transjakarta, dan lainnya)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="online"
+                            id="online">
+                        <label class="form-check-label" for="online">
+                            Online transportation (Grab/Gojek)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="mobil" id="mobil">
+                        <label class="form-check-label" for="mobil">
+                            Mobil (pribadi)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="transport_type" type="checkbox" value="motor" id="motor">
+                        <label class="form-check-label" for="motor">
+                            Motor (pribadi)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h5><span class="badge badge-primary">Profil Tempat Bekerja</span></h5>
+            <hr>
+            <div class="form-group col-md-12">
+                <label for="workplace">Jenis lokasi tempat bekerja</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="workplace" id="workplace_kantor" value="kantor">
+                    <label class="form-check-label" for="workplace_kantor">
+                        Kantor
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="workplace" id="workplace_public" value="public">
+                    <label class="form-check-label" for="workplace_public">
+                        Tempat Publik (Mall, Café, Stasiun, Bandara, dll)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="workplace" id="workplace_health" value="health">
+                    <label class="form-check-label" for="workplace_health">
+                        Fasilitas Kesehatan (Rumah sakit, puskesmas, dll)
+                    </label>
+                </div>
+            </div>
+
+            <br>
+            <h5><span class="badge badge-primary">Mobilitas ke tempat bekerja</span></h5>
+            <hr>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="origin">Area tempat tinggal (kelurahan, kota)</label>
+                    <input type="text" class="form-control" name="origin" id="origin" required>
+                    <div id='originMap'
+                        style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="destination">Lokasi tempat bekerja (latitude, longitude)</label>
+                    <input type="text" class="form-control" name="destination" id="destination" required>
+                    <div id='destinationMap'
+                        style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                     <label class="form-check-label" for="gridCheck">
-                        I am consent ...
+                        Saya telah mengisi data dengan benar untuk membantu memberikan informasi kewaspadaan Covid-19 yang lebih baik.  
                     </label>
                 </div>
             </div>
@@ -131,16 +277,21 @@
     <script src='js/main.js'></script>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyq-jz2lLLrqyFRlCVXAcEEXK1KU2qs8VXcXZ_F8sVeuXv_1EjX/exec'
+        const scriptURL =
+            'https://script.google.com/macros/s/AKfycbyq-jz2lLLrqyFRlCVXAcEEXK1KU2qs8VXcXZ_F8sVeuXv_1EjX/exec'
         const form = document.forms['submit-to-google-sheet']
 
         form.addEventListener('submit', e => {
+            transportType();
             e.preventDefault()
             fetch(scriptURL, {
                     method: 'POST',
                     body: new FormData(form)
                 })
-                .then(response => alert('form successfully submitted'))
+                .then(response => function () {
+                    alert('form successfully submitted');
+
+                })
                 .catch(error => console.error('Error!', error.message))
         })
     </script>
@@ -148,4 +299,3 @@
 </body>
 
 </html>
-
