@@ -28,10 +28,8 @@ var destinationMarker = new mapboxgl.Marker({
 originMap.on('click', function (e) {
     let originLat = e.lngLat.lat;
     let originLng = e.lngLat.lng;
-    console.log(originLat + ', ' + originLng);
-    let originCoord = originLat + ', ' + originLng;
+    
     let queryCoord = originLat + ',' + originLng
-    // document.getElementById('origin').value = originCoord;
     originMarker.setLngLat(e.lngLat);
     geocoding(queryCoord)
 });
@@ -39,9 +37,8 @@ originMap.on('click', function (e) {
 destinationMap.on('click', function (e) {
     let destinationLat = e.lngLat.lat;
     let destinationLng = e.lngLat.lng;
-    console.log(destinationLat + ', ' + destinationLng);
+    
     let destinationCoord = destinationLat + ', ' + destinationLng;
-    let markerCoord = [destinationLng + ', ' + destinationLat]
     document.getElementById('destination').value = destinationCoord;
     destinationMarker.setLngLat(e.lngLat);
 });
@@ -78,13 +75,13 @@ destinationMap.on('zoomend', function () {
 $("#origin").focus(function () {
     $("#originMap").show()
     $("#destinationMap").hide()
-    console.log('origin')
+    
     originMap.resize();
 });
 $("#destination").focus(function () {
     $("#originMap").hide()
     $("#destinationMap").show()
-    console.log('destination')
+    
     destinationMap.resize();
 
 });
@@ -92,7 +89,6 @@ $("#destination").focus(function () {
 //marker
 originMarker.on('dragend', function (e) {
     let lngLat = originMarker.getLngLat();
-    // document.getElementById('origin').value = lngLat.lat + ', ' + lngLat.lng
     let queryCoord = lngLat.lat + ',' + lngLat.lng
     geocoding(queryCoord)
 
@@ -113,7 +109,7 @@ function selectOccupation() {
 }
 
 function selectFrequency() {
-    console.log('oi')
+    
     if (document.getElementById('sudahKeKantor').checked == true) {
         $("#less").prop('disabled', false);
         $("#more").prop('disabled', false);
@@ -126,12 +122,12 @@ function selectFrequency() {
 }
 
 function geocoding(coord) {
-    console.log(coord)
+    
     let query = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + coord + "&key=AIzaSyABkPJiUqaQ3bqgyV_-d2itIY1cnsegSC8"
     fetch(query)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            
             document.getElementById('origin').value = data.plus_code.compound_code.substr(7);
         });
 }
