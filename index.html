@@ -34,28 +34,41 @@
     <div class="container">
 
         <div class="jumbotron">
-            <h2>Studi Mobilitas Kantor-Rumah</h2>
-            <p>Tim Pakar Satuan Tugas Penanganan COVID-19, Dewi Nur Aisyah mengatakan, setidaknya ada 90
-                perkantoran di DKI Jakarta yang menjadi klister penyebaran COVID-10. Setidaknya 459 orang dinyatakan
-                positif dari ke-90 perkantoran tersebut (Tirto.id, 29/07/2020). DKI Jakarta sebagai pusat perkantoran di
-                kawasan metropolitan Jabodetabek menjadi hub bagi pegawai baik negeri swasta yang bertempat tinggal dari
-                kota/kabupaten di sekitarnya. Kamu bisa menemukan rekan kerja dalam satu kantor ataupun pegawai lainnya
-                dalam satu Gedung yang tinggal di kawasan sub-urban lainnya dengan menggunakan moda transportasi yang
-                beragam dari mulai kendaraan pribadi dan umum seperti KRL, MRT, Bus, dan lainnya.
+            <img src="img/header.jpeg" width="100%" style="border-radius: 10px;"><br><br>
+            <h2>Studi Mobilitas Kantor-Rumah</h2><br>
+            <h4 style="color: red; font-style: italic;">Klaster perkantoran menjadi titik baru penyebaran COVID-19?</h4><br>
+            <p>
+            Setidaknya ada 90 perkantoran di DKI Jakarta yang menjadi klaster penyebaran COVID-19, menurut Dewi Nur
+            Aisyah, Tim Pakar Satgas Penanganan COVID-19. Setidaknya 459 orang dinyatakan positif dari di sana.
+            (Tirto.id, 29/07/2020).
             </p>
             <p>
-                Tingginya frekuensi pertemuan dengan beragam orang dari berbagai wilayah pada satu tempat dapat
-                meningkatkan potensi tertular dan menularkan penyakit Covid-19. Oleh karena itu, kami ingin melakukan
-                survey Origin-Destination dan penggunaan moda transportasi bagi pekerja yang bekerja di kawasan
-                Jabodetak. Data dan informasi yang dikumpulkan akan dipublikasikan agar meningkatkan kewaspadaan dan
-                mitigasi teman sekalian dalam bekerja. Terimakasih 
+            DKI Jakarta sebagai pusat perkantoran di kawasan metropolitan Jabodetabek menjadi hub bagi pegawai baik
+            negeri swasta yang bertempat tinggal dari kota/kabupaten di sekitarnya. Orang yang bekerja satu Gedung
+            dengan kita (baik satu kantor maupun tidak) bisa berasal dari lokasi yang beragam. Mereka juga menggunakan
+            moda transportasi yang beragam dari mulai kendaraan pribadi dan umum seperti KRL, MRT, Bus, dan lainnya.
             </p>
+            <p>
+            Tingginya frekuensi pertemuan dengan beragam orang dari berbagai wilayah pada satu tempat dapat meningkatkan
+            potensi tertular dan menularkan penyakit Covid-19. Oleh karena itu, kami melakukan survei Origin-Destination
+            (Rumah-Kantor) dan penggunaan moda transportasi bagi pekerja yang bekerja di kawasan Jabodetak. Data dan
+            informasi yang dikumpulkan akan dipublikasikan agar meningkatkan kewaspadaan dan mitigasi teman-teman
+            sekalian dalam bekerja. Survei ini dapat diisi dalam waktu 3-5 menit
+            </p>
+
+            Terima kasih. <br>
+
+            Tim peneliti,<br><br>
+
+            Rizki Fadhilah Anandika<br>
+            Atika Almira<br>
+            Hanfie Vandanu
+
             <hr class="my-4">
-            
-            <a class="btn btn-primary btn-lg" href="#" role="button">Lihat hasil</a>
+            <a target="_blank" class="btn btn-secondary btn-block" href="https://docs.google.com/spreadsheets/d/1bkU2ixjqkYyfFzd-dLJuY98RDzt67H-LPscZav2OhjM/edit?usp=sharing" role="button">Lihat hasil</a>
         </div>
         <form id="form" name="submit-to-google-sheet">
-            <h5><span class="badge badge-primary">Profil Diri</span></h5>
+            <h5><span class="badge badge-primary ">Profil Diri</span></h5>
             <hr>
 
             <div class="form-group">
@@ -251,7 +264,8 @@
                 <div class="form-group col-md-12">
                     <label for="origin">Area tempat tinggal* (kelurahan, kota)</label>
                     <input type="text" class="form-control" name="origin" id="origin" required>
-                    <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi sesungguhnya</small>
+                    <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi
+                        sesungguhnya</small>
                     <div id='originMap'
                         style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
                 </div>
@@ -266,7 +280,8 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                     <label class="form-check-label" for="gridCheck">
-                        Saya telah mengisi data dengan benar untuk membantu memberikan informasi kewaspadaan Covid-19 yang lebih baik.  
+                        Saya telah mengisi data dengan benar untuk membantu memberikan informasi kewaspadaan Covid-19
+                        yang lebih baik.
                     </label>
                 </div>
             </div>
@@ -284,20 +299,18 @@
 
         form.addEventListener('submit', e => {
             transportType();
-            
-            
             e.preventDefault()
             fetch(scriptURL, {
                     method: 'POST',
                     body: new FormData(form)
                 })
                 .then(response => function () {
-                   console.log(response)
+                    console.log(response)
                 })
                 .catch(error => console.error('Error!', error.message))
-                
-                alert('The form has been successfully submitted ')
-                $('#form')[0].reset();
+
+            alert('The form has been successfully submitted ')
+            $('#form')[0].reset();
         })
     </script>
 
