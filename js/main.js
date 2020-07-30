@@ -126,7 +126,6 @@ function selectFrequency() {
 }
 
 function geocoding(coord) {
-    AIzaSyABkPJiUqaQ3bqgyV_-d2itIY1cnsegSC8
     console.log(coord)
     let query = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + coord + "&key=AIzaSyABkPJiUqaQ3bqgyV_-d2itIY1cnsegSC8"
     fetch(query)

@@ -35,7 +35,7 @@
 
         <div class="jumbotron">
             <img src="img/header.jpeg" width="100%" style="border-radius: 10px;"><br><br>
-            <h2>Studi Mobilitas Kantor-Rumah</h2><br>
+            <h2>Studi Mobilitas Kantor-Rumah</h2>
             <h4 style="color: red; font-style: italic;">Klaster perkantoran menjadi titik baru penyebaran COVID-19?</h4><br>
             <p>
             Setidaknya ada 90 perkantoran di DKI Jakarta yang menjadi klaster penyebaran COVID-19, menurut Dewi Nur
@@ -65,7 +65,7 @@
             Hanfie Vandanu
 
             <hr class="my-4">
-            <a target="_blank" class="btn btn-secondary btn-block" href="https://docs.google.com/spreadsheets/d/1bkU2ixjqkYyfFzd-dLJuY98RDzt67H-LPscZav2OhjM/edit?usp=sharing" role="button">Lihat hasil</a>
+            <a target="_blank" class="btn btn-secondary btn-block" href="https://docs.google.com/spreadsheets/d/1bkU2ixjqkYyfFzd-dLJuY98RDzt67H-LPscZav2OhjM/edit?usp=sharing" role="button">Lihat hasil form</a>
         </div>
         <form id="form" name="submit-to-google-sheet">
             <h5><span class="badge badge-primary ">Profil Diri</span></h5>
@@ -115,7 +115,7 @@
                 <div class="form-group col-md-12">
                     <label for="work_frequency">Frequensi kamu ke tempat kerja?</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="work_frequency" id="less" value="<3"
+                        <input class="form-check-input" type="radio" name="work_frequency" id="less" value="≤3"
                             disabled>
                         <label class="form-check-label" for="less">
                             ≤ 3 hari/minggu
@@ -182,6 +182,7 @@
                     <label for="total_trip">Berapa jumlah perjalanan (trip) menggunakan transportasi publik selama satu
                         minggu?</label>
                     <input type="text" class="form-control" name="total_trip" id="total_trip" required>
+                    <small>Trip: perjalanan yang dilakukan baik pada lingkup dalam dan lintas kota</small>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="transport_type">Apa transportasi yang kamu gunakan?</label>
@@ -262,7 +263,8 @@
             <hr>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="origin">Area tempat tinggal* (kelurahan, kota)</label>
+                    <small>[kelurahan, kota]</small><br>
+                    <label for="origin">Area tempat tinggal* (tunjuk lokasi pada peta)</label>
                     <input type="text" class="form-control" name="origin" id="origin" required>
                     <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi
                         sesungguhnya</small>
@@ -270,7 +272,8 @@
                         style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="destination">Lokasi tempat bekerja (latitude, longitude)</label>
+                    <small>[latitude, longitude]</small><br>
+                    <label for="destination">Lokasi tempat bekerja (tunjuk lokasi pada peta)</label>
                     <input type="text" class="form-control" name="destination" id="destination" required>
                     <div id='destinationMap'
                         style='width: 100%; height: 300px; display: none;border-radius: 10px;margin-top: 10px;'></div>
