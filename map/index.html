@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet" />
+
+    <script src="https:////cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></script>
+    <link href="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" rel="stylesheet" />
+
+
+    
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .mapboxgl-popup {
+            max-width: 900px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="map"></div>
+    <script>
+        var geojson = []
+
+        fetch('https://sheet.best/api/sheets/576759a0-909a-46f5-bdf8-b836b591c06e')
+            // fetch('https://sheet.best/api/sheets/91118df0-feb2-4f77-a8eb-0541cb374b12')
+            .then(response => response.json())
+            .then(data => {
+                this.createGeoJSON(data);
+            });
+
+        function createGeoJSON(data) {
+            console.log(data)
+
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoiY2l0eXBsYW4tbGFicyIsImEiOiJjajVvY29sczUzOGxpMzNtbm01czV5ejVpIn0.tM76BldWIAHyWdNPSPRGtg';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v10',
+                center: [106.827153, -6.175392],
+                zoom: 9
+            });
+
+            setTimeout(loadData, 5000)
+            map.on('click', 'points_layer', function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = JSON.stringify(e.features[0].properties);
+
+
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'points_layer', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'points_layer', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+
+
+
+            function loadData() {
+
+                map.addLayer({
+                    'id': 'points_layer',
+                    'type': 'circle',
+                    'source': {
+                        'type': 'geojson',
+                        'data': {
+                            "type": "FeatureCollection",
+                            "features": geojson
+                        }
+                    },
+                    'paint': {
+                        'circle-color': "#5b76f9",
+                        'circle-radius': 5
+                    }
+                });
+            }
+
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].destination.match(/\d+/g) != null) {
+                    geojson.push({
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [parseFloat(data[i].destination.split(',')[1]), parseFloat(data[i]
+                                .destination.split(',')[0])]
+                        },
+                        properties: {
+                            origin: data[i].origin,
+                            building: data[i].destination_building,
+                            house_type: data[i].house_type,
+                            occupation: data[i].occupation,
+                            other_occupation: data[i].other_occupation,
+                            start_work: data[i].start_work,
+                            surrounding_environment: data[i].surrounding_environment,
+                            total_people: data[i].total_people,
+                            total_trip: data[i].total_trip,
+                            transport_type: data[i].transport_type,
+                            vulnerable_group: data[i].vulnerable_group,
+                            work_frequency: data[i].work_frequency,
+                            workplace: data[i].workplace
+                        }
+                    });
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
