@@ -127,8 +127,8 @@ function geocoding(coord) {
     fetch(query)
         .then(response => response.json())
         .then(data => {
-            
-            document.getElementById('origin').value = data.plus_code.compound_code.substr(7);
+            console.log(data)
+            document.getElementById('origin').value = data.results[0].plus_code.compound_code.substr(7);
         });
 }
 
