@@ -47,29 +47,29 @@ destinationMap.on('click', function (e) {
 originMap.on('dragend', function (e) {
     let originCenter = originMap.getCenter();
     let originZoom = originMap.getZoom();
-    destinationMap.setCenter(originCenter);
-    destinationMap.setZoom(originZoom);
+    // destinationMap.setCenter(originCenter);
+    // destinationMap.setZoom(originZoom);
 });
 
 originMap.on('zoomend', function () {
     let originCenter = originMap.getCenter();
     let originZoom = originMap.getZoom();
-    destinationMap.setCenter(originCenter);
-    destinationMap.setZoom(originZoom);
+    // destinationMap.setCenter(originCenter);
+    // destinationMap.setZoom(originZoom);
 });
 
 destinationMap.on('dragend', function (e) {
     let destinationCenter = destinationMap.getCenter();
     let destinationZoom = destinationMap.getZoom();
-    originMap.setCenter(destinationCenter);
-    originMap.setZoom(destinationZoom);
+    // originMap.setCenter(destinationCenter);
+    // originMap.setZoom(destinationZoom);
 });
 
 destinationMap.on('zoomend', function () {
     let destinationCenter = destinationMap.getCenter();
     let destinationZoom = destinationMap.getZoom();
-    originMap.setCenter(destinationCenter);
-    originMap.setZoom(destinationZoom);
+    // originMap.setCenter(destinationCenter);
+    // originMap.setZoom(destinationZoom);
 });
 
 $("#origin").focus(function () {
