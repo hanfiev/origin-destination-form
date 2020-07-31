@@ -36,24 +36,28 @@
         <div class="jumbotron">
             <img src="img/header.jpeg" width="100%" style="border-radius: 10px;"><br><br>
             <h2>Studi Mobilitas Kantor-Rumah</h2>
-            <h4 style="color: red; font-style: italic;">Klaster perkantoran menjadi titik baru penyebaran COVID-19?</h4><br>
+            <h4 style="color: red; font-style: italic;">Klaster perkantoran menjadi titik baru penyebaran COVID-19?</h4>
+            <br>
             <p>
-            Setidaknya ada 90 perkantoran di DKI Jakarta yang menjadi klaster penyebaran COVID-19, menurut Dewi Nur
-            Aisyah, Tim Pakar Satgas Penanganan COVID-19. Setidaknya 459 orang dinyatakan positif dari di sana.
-            (Tirto.id, 29/07/2020).
+                Setidaknya ada 90 perkantoran di DKI Jakarta yang menjadi klaster penyebaran COVID-19, menurut Dewi Nur
+                Aisyah, Tim Pakar Satgas Penanganan COVID-19. Setidaknya 459 orang dinyatakan positif dari di sana.
+                (Tirto.id, 29/07/2020).
             </p>
             <p>
-            DKI Jakarta sebagai pusat perkantoran di kawasan metropolitan Jabodetabek menjadi hub bagi pegawai baik
-            negeri swasta yang bertempat tinggal dari kota/kabupaten di sekitarnya. Orang yang bekerja satu Gedung
-            dengan kita (baik satu kantor maupun tidak) bisa berasal dari lokasi yang beragam. Mereka juga menggunakan
-            moda transportasi yang beragam dari mulai kendaraan pribadi dan umum seperti KRL, MRT, Bus, dan lainnya.
+                DKI Jakarta sebagai pusat perkantoran di kawasan metropolitan Jabodetabek menjadi hub bagi pegawai baik
+                negeri swasta yang bertempat tinggal dari kota/kabupaten di sekitarnya. Orang yang bekerja satu Gedung
+                dengan kita (baik satu kantor maupun tidak) bisa berasal dari lokasi yang beragam. Mereka juga
+                menggunakan
+                moda transportasi yang beragam dari mulai kendaraan pribadi dan umum seperti KRL, MRT, Bus, dan lainnya.
             </p>
             <p>
-            Tingginya frekuensi pertemuan dengan beragam orang dari berbagai wilayah pada satu tempat dapat meningkatkan
-            potensi tertular dan menularkan penyakit Covid-19. Oleh karena itu, kami melakukan survei Origin-Destination
-            (Rumah-Kantor) dan penggunaan moda transportasi bagi pekerja yang bekerja di kawasan Jabodetak. Data dan
-            informasi yang dikumpulkan akan dipublikasikan agar meningkatkan kewaspadaan dan mitigasi teman-teman
-            sekalian dalam bekerja. Survei ini dapat diisi dalam waktu 3-5 menit
+                Tingginya frekuensi pertemuan dengan beragam orang dari berbagai wilayah pada satu tempat dapat
+                meningkatkan
+                potensi tertular dan menularkan penyakit Covid-19. Oleh karena itu, kami melakukan survei
+                Origin-Destination
+                (Rumah-Kantor) dan penggunaan moda transportasi bagi pekerja yang bekerja di kawasan Jabodetak. Data dan
+                informasi yang dikumpulkan akan dipublikasikan agar meningkatkan kewaspadaan dan mitigasi teman-teman
+                sekalian dalam bekerja. Survei ini dapat diisi dalam waktu 3-5 menit
             </p>
 
             Terima kasih. <br>
@@ -65,7 +69,9 @@
             Hanfie Vandanu
 
             <hr class="my-4">
-            <a target="_blank" class="btn btn-secondary btn-block" href="https://docs.google.com/spreadsheets/d/1bkU2ixjqkYyfFzd-dLJuY98RDzt67H-LPscZav2OhjM/edit?usp=sharing" role="button">Lihat hasil form</a>
+            <a target="_blank" class="btn btn-secondary btn-block"
+                href="https://docs.google.com/spreadsheets/d/1bkU2ixjqkYyfFzd-dLJuY98RDzt67H-LPscZav2OhjM/edit?usp=sharing"
+                role="button">Lihat hasil form</a>
         </div>
         <form id="form" name="submit-to-google-sheet">
             <h5><span class="badge badge-primary ">Profil Diri</span></h5>
@@ -73,7 +79,7 @@
 
             <div class="form-group">
                 <label for="age">Usia</label>
-                <input type="text" class="form-control" name="age" id="age" placeholder="" required>
+                <input type="number" class="form-control" name="age" id="age" placeholder="" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
@@ -157,7 +163,8 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="total_people">Jumlah orang yang tinggal bersama</label>
-                    <input type="text" class="form-control" name="total_people" id="total_people" placeholder="contoh: 5" required>
+                    <input type="text" class="form-control" name="total_people" id="total_people"
+                        placeholder="contoh: 5" required>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="vulnerable_group">Apa kamu tinggal dengan balita, lansia, dan atau Ibu Hamil?</label>
@@ -181,7 +188,8 @@
                 <div class="form-group col-md-12">
                     <label for="total_trip">Jumlah perjalanan (trip) menggunakan transportasi publik selama satu
                         minggu</label>
-                    <input type="text" class="form-control" name="total_trip" id="total_trip" placeholder="contoh: 14"required>
+                    <input type="number" class="form-control" name="total_trip" id="total_trip" placeholder="contoh: 14"
+                        required>
                     <small>Trip: perjalanan yang dilakukan baik pada lingkup dalam dan lintas kota</small>
                 </div>
                 <div class="form-group col-md-12">
@@ -267,24 +275,37 @@
                 <input type="text" class="form-control" name="origin" id="origin" readonly required>
                 <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi
                     sesungguhnya</small>
-                <div id='originMap'
-                    style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
+                <div id='originMap' style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <small></small><br>
                     <label for="destination_building">Nama gedung tempat bekerja(Jika ada)</label>
-                    <input type="text" class="form-control" name="destination_building" id="destination_building" placeholder="contoh: Menara A">
-            </div>
+                    <input type="text" class="form-control" name="destination_building" id="destination_building"
+                        placeholder="contoh: Menara A">
+                </div>
                 <div class="form-group col-md-6">
                     <small>[latitude, longitude]</small><br>
                     <label for="destination">Lokasi tempat bekerja (tunjuk lokasi pada peta)</label>
                     <input type="text" class="form-control" name="destination" id="destination" readonly required>
-            </div>
-            
-            <div id='destinationMap'
-                        style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
                 </div>
+
+                <div id='destinationMap' style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
+            </div>
+            <hr><br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <h4>Voucher Giveaway</h4>
+                    <p>Kami akan membagikan voucher ovo/gopay bagi peserta survey yang beruntung, untuk berpartisipasi
+                        silahkan isi nomor handphone di kolom berikut</p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone_number">Nomor Handphone</label>
+                    <input type="number" class="form-control" name="phone_number" id="phone_number" placeholder="">
+                    <small>Opsional, data nomor handphone tidak akan dipublish</small>
+                </div>
+            </div>
+            <hr>
             <div class="form-group">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
@@ -294,19 +315,26 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
-
+        <br>
     </div>
 
     <script src='js/main.js'></script>
 
     <script>
+        const phoneURL =
+            'https://script.google.com/macros/s/AKfycbzK-0dOcL0kf_IdoL6GCICd4byIHJdLvbN4YbSk3wJXPsQeLWhB/exec'
+
+
         const scriptURL =
             'https://script.google.com/macros/s/AKfycbyq-jz2lLLrqyFRlCVXAcEEXK1KU2qs8VXcXZ_F8sVeuXv_1EjX/exec'
         const form = document.forms['submit-to-google-sheet']
 
         form.addEventListener('submit', e => {
+            
+            $('#form').hide()
+
             transportType();
             e.preventDefault()
             fetch(scriptURL, {
@@ -319,7 +347,19 @@
                 .catch(error => console.error('Error!', error.message))
 
             alert('The form has been successfully submitted ')
+
+
+            fetch(phoneURL, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => function () {
+                    console.log(response)
+                })
+                .catch(error => console.error('Error!', error.message))
+
             $('#form')[0].reset();
+
         })
     </script>
 
