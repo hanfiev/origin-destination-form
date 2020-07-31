@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumah-Kantor Study Form</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
 
     <!-- Mapbox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
@@ -193,7 +195,7 @@
                     <small>Trip: perjalanan yang dilakukan baik pada lingkup dalam dan lintas kota</small>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="transport_type">Apa transportasi yang kamu gunakan?</label>
+                    <label for="transport_type">Jenis transportasi yang kamu gunakan</label>
 
                     <div class="form-check">
                         <input class="form-check-input" name="transport_type" type="checkbox" value="krl"
@@ -255,13 +257,13 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="workplace" id="workplace_public" value="public">
                     <label class="form-check-label" for="workplace_public">
-                        Tempat Publik (Mall, Café, Stasiun, Bandara, dll)
+                        Tempat Publik <br>(Mall, Café, Stasiun, Bandara, dll)
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="workplace" id="workplace_health" value="health">
                     <label class="form-check-label" for="workplace_health">
-                        Fasilitas Kesehatan (Rumah sakit, puskesmas, dll)
+                        Fasilitas Kesehatan <br>(Rumah sakit, puskesmas, dll)
                     </label>
                 </div>
             </div>
@@ -272,7 +274,7 @@
             <div class="form-group">
                 <small>[kelurahan, kota]</small><br>
                 <label for="origin">Area tempat tinggal* (tunjuk lokasi pada peta)</label>
-                <input type="text" class="form-control" name="origin" id="origin" readonly required>
+                <input type="text" class="form-control" name="origin" id="origin" onkeypress="return false;" required>
                 <small>*tingkat kedetailan lokasi di level kelurahan, form tidak menyimpan titik lokasi
                     sesungguhnya</small>
                 <div id='originMap' style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
@@ -287,7 +289,7 @@
                 <div class="form-group col-md-6">
                     <small>[latitude, longitude]</small><br>
                     <label for="destination">Lokasi tempat bekerja (tunjuk lokasi pada peta)</label>
-                    <input type="text" class="form-control" name="destination" id="destination" readonly required>
+                    <input type="text" class="form-control" name="destination" id="destination" onkeypress="return false;" required>
                 </div>
 
                 <div id='destinationMap' style='width: 100%; height: 300px;border-radius: 10px;margin-top: 10px;'></div>
