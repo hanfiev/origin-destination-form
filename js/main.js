@@ -73,14 +73,14 @@ destinationMap.on('zoomend', function () {
 });
 
 $("#origin").focus(function () {
-    $("#originMap").show()
-    $("#destinationMap").hide()
+    // $("#originMap").show()
+    // $("#destinationMap").hide()
     
     originMap.resize();
 });
 $("#destination").focus(function () {
-    $("#originMap").hide()
-    $("#destinationMap").show()
+    // $("#originMap").hide()
+    // $("#destinationMap").show()
     
     destinationMap.resize();
 
