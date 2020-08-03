@@ -9,24 +9,71 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet" />
 
-    <script src="https:////cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></script>
-    <link href="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-
-    
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
 
     <style>
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
+        #intro {
             width: 100%;
+            text-align: center;
         }
+
+        @media only screen and (max-width: 600px) {
+            #map {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 60vh;
+            }
+
+            #card {
+                position: absolute;
+                bottom: 0;
+                height: 50vh;
+                width: 100%;
+                background-color: #ffffff;
+                z-index: 999;
+                border-radius: 30px 30px 0px 0px;
+                overflow: scroll;
+            }
+        }
+
+        @media only screen and (min-width: 600px) {
+            #map {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            #card {
+                position: absolute;
+                top: 0;
+                height: auto;
+                width: 300px;
+                margin: 20px;
+                border-radius: 10px;
+                background-color: #272931;
+                z-index: 999;
+                box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198), 0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+            }
+
+            #card-header {
+                height:50px;
+                background-color: #29333c;
+                padding: 15px;
+            }
+        }
+
 
         .mapboxgl-popup {
             max-width: 900px;
@@ -36,86 +83,160 @@
 </head>
 
 <body>
-
-
     <div id="map"></div>
-    <script>
-        var geojson = []
+    <!-- <div id="card">
+        <div id="card-header"><img src="https://d1a3f4spazzrp4.cloudfront.net/kepler.gl/website/icons/kepler.gl-logo.png" height="20px"></div>
+        <div id="intro">Tap a point to view info</div>
+        <div id="description"></div>
+        <div id="info">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div> -->
 
-        fetch('https://sheet.best/api/sheets/576759a0-909a-46f5-bdf8-b836b591c06e')
-            // fetch('https://sheet.best/api/sheets/91118df0-feb2-4f77-a8eb-0541cb374b12')
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+        var geojson = []
+        var lineData = []
+        var originData = []
+
+
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiY2l0eXBsYW4tbGFicyIsImEiOiJjajVvY29sczUzOGxpMzNtbm01czV5ejVpIn0.tM76BldWIAHyWdNPSPRGtg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/cityplan-labs/ckdaiezlj18ci1iqad02gjknk',
+            center: [106.827153, -6.175392],
+            zoom: 9
+        });
+
+        var linepopup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+
+        fetch('https://sheet.best/api/sheets/47859426-2e2d-4c45-a285-cb6eaa502891')
             .then(response => response.json())
             .then(data => {
                 this.createGeoJSON(data);
             });
 
+
+
+        map.on('click', 'destinationPointsLayer', function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = JSON.stringify(e.features[0].properties);
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'destinationPointsLayer', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'destinationPointsLayer', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('mouseenter', 'line_layer', function (e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            document.getElementById("description").innerHTML = JSON.stringify(description)
+        });
+
+        map.on('mouseleave', 'line_layer', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+        var kucing = '';
+
+        var arcData = [];
+
         function createGeoJSON(data) {
             console.log(data)
-
-            mapboxgl.accessToken =
-                'pk.eyJ1IjoiY2l0eXBsYW4tbGFicyIsImEiOiJjajVvY29sczUzOGxpMzNtbm01czV5ejVpIn0.tM76BldWIAHyWdNPSPRGtg';
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/light-v10',
-                center: [106.827153, -6.175392],
-                zoom: 9
-            });
-
             setTimeout(loadData, 5000)
-            map.on('click', 'points_layer', function (e) {
-                var coordinates = e.features[0].geometry.coordinates.slice();
-                var description = JSON.stringify(e.features[0].properties);
-
-
-
-                // Ensure that if the map is zoomed out such that multiple
-                // copies of the feature are visible, the popup appears
-                // over the copy being pointed to.
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-
-                new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(description)
-                    .addTo(map);
-            });
-
-            // Change the cursor to a pointer when the mouse is over the places layer.
-            map.on('mouseenter', 'points_layer', function () {
-                map.getCanvas().style.cursor = 'pointer';
-            });
-
-            // Change it back to a pointer when it leaves.
-            map.on('mouseleave', 'points_layer', function () {
-                map.getCanvas().style.cursor = '';
-            });
-
-
-
-
-            function loadData() {
-
-                map.addLayer({
-                    'id': 'points_layer',
-                    'type': 'circle',
-                    'source': {
-                        'type': 'geojson',
-                        'data': {
-                            "type": "FeatureCollection",
-                            "features": geojson
-                        }
-                    },
-                    'paint': {
-                        'circle-color': "#5b76f9",
-                        'circle-radius': 5
-                    }
-                });
-            }
 
             for (i = 0; i < data.length; i++) {
 
-                if (data[i].destination.match(/\d+/g) != null) {
+                if (data[i].destination.match(/\d+/g) != null && data[i].Longitude.match(/\d+/g) != null) {
+
+                    // t.row.add([
+                    //    col1,col2,col3,col5,col5
+                    // ]).draw(false);
+
+                    kucing = data;
+                    
+                    originData.push({
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [parseFloat(data[i].Longitude), parseFloat(data[i].Latitude)]
+                        },
+                        properties: {
+                            origin: data[i].origin,
+                            building: data[i].destination_building,
+                            house_type: data[i].house_type,
+                            occupation: data[i].occupation,
+                            other_occupation: data[i].other_occupation,
+                            start_work: data[i].start_work,
+                            surrounding_environment: data[i].surrounding_environment,
+                            total_people: data[i].total_people,
+                            total_trip: data[i].total_trip,
+                            transport_type: data[i].transport_type,
+                            vulnerable_group: data[i].vulnerable_group,
+                            work_frequency: data[i].work_frequency,
+                            workplace: data[i].workplace
+                        }
+                    });
+
+
                     geojson.push({
                         type: "Feature",
                         geometry: {
@@ -139,8 +260,109 @@
                             workplace: data[i].workplace
                         }
                     });
+
+                    lineData.push({
+                        type: "Feature",
+                        geometry: {
+                            type: "LineString",
+                            coordinates: [
+                                [parseFloat(data[i].destination.split(',')[1]), parseFloat(data[i]
+                                    .destination.split(',')[0])],
+                                [parseFloat(data[i].Longitude), parseFloat(data[i].Latitude)]
+                            ]
+                        },
+                        properties: {
+                            origin: data[i].origin,
+                            building: data[i].destination_building,
+                            house_type: data[i].house_type,
+                            occupation: data[i].occupation,
+                            other_occupation: data[i].other_occupation,
+                            start_work: data[i].start_work,
+                            surrounding_environment: data[i].surrounding_environment,
+                            total_people: data[i].total_people,
+                            total_trip: data[i].total_trip,
+                            transport_type: data[i].transport_type,
+                            vulnerable_group: data[i].vulnerable_group,
+                            work_frequency: data[i].work_frequency,
+                            workplace: data[i].workplace
+                        }
+                        // originLat: parseFloat(data[i].Latitude),
+                        // originLon: parseFloat(data[i].Longitude),
+                        // destinationLat: parseFloat(data[i].destination.split(',')[0]),
+                        // destinationLon: parseFloat(data[i].destination.split(',')[1])
+                    });
+
+                    arcData.push(turf.greatCircle(turf.point([parseFloat(data[i].destination.split(',')[1]), parseFloat(data[i].destination.split(',')[0])]),turf.point([parseFloat(data[i].Longitude), parseFloat(data[i].Latitude)]), {'name': 'Seattle to DC'})) 
                 }
             };
+        }
+
+
+
+
+
+        function loadData() {
+
+            map.addLayer({
+                'id': 'originPointsLayer',
+                'type': 'circle',
+                'source': {
+                    'type': 'geojson',
+                    'data': {
+                        "type": "FeatureCollection",
+                        "features": originData
+                    }
+                },
+                'paint': {
+                    'circle-color': "#b10231",
+                    'circle-radius': 4,
+                }
+            });
+
+            map.addLayer({
+                'id': 'destinationPointsLayer',
+                'type': 'circle',
+                'source': {
+                    'type': 'geojson',
+                    'data': {
+                        "type": "FeatureCollection",
+                        "features": geojson
+                    }
+                },
+                'paint': {
+                    'circle-color': "#e7c60c",
+                    'circle-radius': 5
+                }
+            });
+
+
+
+
+            map.addLayer({
+                'id': 'line_layer',
+                'type': 'line',
+                'source': {
+                    'type': 'geojson',
+                    'lineMetrics': true,
+                    'data': {
+                        "type": "FeatureCollection",
+                        "features": arcData
+                    }
+                },
+                'paint': {
+                    'line-color': "#5b76f9",
+                    'line-width': 2,
+                    'line-gradient': [
+                        'interpolate',
+                        ['linear'],
+                        ['line-progress'],
+                        0,
+                        '#e7c60c',
+                        1,
+                        '#b10231'
+                    ]
+                }
+            });
         }
     </script>
 </body>
